@@ -3,6 +3,15 @@
 #This Script should be run after the Installation of Rhel Machine
 #This Script is made for System Hardening and Basic User utilities
 #Author : Breej b Bagadia
+
+
+if grep -qiE "red hat|rhel|centos|rocky|almalinux" /etc/*release 2>/dev/null; then
+    echo "✅ This system is RHEL-based."
+else
+    echo "❌ This system is NOT RHEL-based."
+	exit
+fi
+
 if [ $(whoami) = "root" ]; then
 	echo "Script is running by root user"
 else
@@ -18,11 +27,7 @@ useradd $name
 read -s -p "Password for $name:" pass
 echo "$name:$pass" | chpasswd
 echo -e "\nUser $name Created"
-if grep -qiE "red hat|rhel|centos|rocky|almalinux" /etc/*release 2>/dev/null; then
-    echo "✅ This system is RHEL-based."
-else
-    echo "❌ This system is NOT RHEL-based."
-fi
+
 
 
 #=========================================================================================================================================================
